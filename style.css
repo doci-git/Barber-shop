@@ -35,7 +35,7 @@ nav {
 .toggle {
   background-color: rgb(19, 17, 17);
   width: 100%;
-  height: 72px;
+  height: 78px;
 }
 
 /*button menu*/
@@ -50,10 +50,10 @@ nav {
 
 /*div logo menu*/
 .toggle .logo {
-  width: 16%;
+  width: 18%;
   float: left;
   margin: 5px 5px 0px;
-  border-radius: 20%;
+  border-radius: 50%;
 }
 
 /*links menu*/
@@ -214,7 +214,7 @@ div p {
 }
 
 .form__email {
-    padding: 10px 10px;
+    padding: 6px 10px;
     border-radius: 5px;
     border: 1px solid #CAD3DB;
     width: 250px;
@@ -230,7 +230,7 @@ div p {
     background: #2f373fd3;
     border: none;
     width: 100px;
-    height: 35px;
+    height: 30px;
     border-radius: 5px;
     font-size: 18px;
     color: white;
