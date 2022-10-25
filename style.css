@@ -293,6 +293,9 @@ div p {
   font-size: 2em;
   margin: 0% 1%;
 }
+.footer .row .creator{
+    color:#b3bcc4;
+}
 @media (max-width:720px) {
 
 
