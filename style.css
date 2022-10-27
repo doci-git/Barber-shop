@@ -321,6 +321,11 @@ div p {
 .footer .row ul {
     width: 100%;
 }
+.footer .row ul .h33{
+    color: gray;
+    font-size: 25px;
+    text-transform: capitalize;
+}
 
 .footer .row ul li {
     display: inline-block;
