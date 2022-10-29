@@ -415,7 +415,7 @@ div p {
     color: #b3bcc4;
 }
 
-@media (max-width:720px) {
+@media (max-width:730px) {
 
 
     .footer {
@@ -432,4 +432,22 @@ div p {
     .footer .row a i {
         margin: 0% 3%;
     }
+}
+@media (min-width:731px) {
+        /*footer*/
+
+        .footer .row ul li {
+            display: block;
+            margin: 20px 0px;
+            text-align: left;
+    }
+
+    .footer .row a i {
+            margin: 0% 3%;
+    }
+
+    .footer .row {
+            font-size: 1em;
+    }
+    
 }
