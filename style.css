@@ -151,6 +151,7 @@ div header .text-homepage {
 }
 
 h2 {
+    padding-top: 20px;
     margin: 20px;
     font-family: "Noto Sans Mono", monospace;
     font-size: 20px;
@@ -232,6 +233,67 @@ div p {
 .btn i {
     font-size: 1.8rem;
     color: #008000;
+}
+
+
+/*Slider*/
+
+.slider-container {
+    width: 95vw;
+    margin: 0 auto;
+    height: 55vh;
+    max-width: 80rem;
+    position: relative;
+    border-radius: 0.3rem;
+    overflow: hidden;
+    margin-top: 4rem;
+}
+
+.slide {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: grid;
+    place-items: center;
+    transition: all 0.25s ease-in-out;
+    text-align: center;
+}
+
+.slide-img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+
+
+.btn-container {
+    position: relative;
+    top: 49%;
+ 
+}
+.prevBtn{   
+    float: left;
+}
+.nextBtn{
+    float: right;
+}
+
+.prevBtn,
+.nextBtn {
+   padding: 10px;
+    z-index: 999;
+    background: transparent;
+    border-color: transparent;
+    font-size: 1.75rem;
+    cursor: pointer;
+    text-transform: capitalize;
+    letter-spacing: 2px;
+    color: rgb(2, 2, 2);
+}
+
+.prevBtn:hover,
+.nextBtn:hover {
+    color: rgb(95, 94, 94);
 }
 
 /*footer*/
