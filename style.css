@@ -265,22 +265,34 @@ div p {
     object-fit: cover;
 }
 
+.slide h2 {
+    top: 5%;
+    text-shadow: 2px 2px 4px;
+    position: absolute;
+    color: #001300;
+    margin: 130px;
+    font-size: 20px;
+    font-family: "Noto Sans Mono", monospace;
+
+}
 
 .btn-container {
     position: relative;
     top: 49%;
- 
+
 }
-.prevBtn{   
+
+.prevBtn {
     float: left;
 }
-.nextBtn{
+
+.nextBtn {
     float: right;
 }
 
 .prevBtn,
 .nextBtn {
-   padding: 10px;
+    padding: 10px;
     z-index: 999;
     background: transparent;
     border-color: transparent;
@@ -433,21 +445,22 @@ div p {
         margin: 0% 3%;
     }
 }
-@media (min-width:731px) {
-        /*footer*/
 
-        .footer .row ul li {
-            display: block;
-            margin: 20px 0px;
-            text-align: left;
+@media (min-width:731px) {
+    /*footer*/
+
+    .footer .row ul li {
+        display: block;
+        margin: 20px 0px;
+        text-align: left;
     }
 
     .footer .row a i {
-            margin: 0% 3%;
+        margin: 0% 3%;
     }
 
     .footer .row {
-            font-size: 1em;
+        font-size: 1em;
     }
-    
+
 }
