@@ -4,7 +4,7 @@ const links = document.querySelector('.links');
 
 toggle.addEventListener('click', function () {
     links.classList.toggle('showlinks')
-    console.log(links);
+    //console.log(links);
 });
 
 // slide image 
