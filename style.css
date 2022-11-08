@@ -474,8 +474,19 @@ div p {
 }
 
 @media (min-width:731px) {
-    /*footer*/
 
+    /*button menu*/
+    .toggle button {
+        margin: 20px;
+        font-size: 2.5rem;
+    }
+
+    /*links menu*/
+    .list-menu {
+        font-size: 26px;
+    }
+
+    /*footer*/
     .footer .row ul li {
         display: block;
         margin: 20px 0px;
