@@ -39,7 +39,7 @@ nav {
 .toggle {
     background-color: rgb(19, 17, 17);
     width: 100%;
-    height: 81px;
+    height: 85px;
 }
 
 /*button menu*/
@@ -54,7 +54,7 @@ nav {
 
 /*div logo menu*/
 .toggle .logo {
-    width: 18%;
+    width: 80px;
     float: left;
     margin: 5px 20px 0px;
     border-radius: 50%;
@@ -463,4 +463,19 @@ div p {
         font-size: 1em;
     }
 
+}
+
+@media (min-width:550px) {
+
+    /*div menu*/
+    .toggle {
+        background-color: rgb(19, 17, 17);
+        width: 100%;
+        height: 111px;
+    }
+
+    /*div logo menu*/
+    .toggle .logo {
+        width: 100px;
+    }
 }
