@@ -464,6 +464,12 @@ div p {
     }
 
 }
+@media (min-width:460px){
+    .slide h2 {
+        top: 12%;
+        left: 6%;
+    }
+}
 
 @media (min-width:550px) {
 
@@ -478,4 +484,9 @@ div p {
     .toggle .logo {
         width: 100px;
     }
+    
+.slide h2 {
+    top: -12%;
+    left: 15%;
+}
 }
