@@ -427,6 +427,33 @@ div p {
     color: #b3bcc4;
 }
 
+@media (min-width:460px) {
+    .slide h2 {
+        top: 12%;
+        left: 6%;
+    }
+}
+
+@media (min-width:550px) {
+
+    /*div menu*/
+    .toggle {
+        background-color: rgb(19, 17, 17);
+        width: 100%;
+        height: 111px;
+    }
+
+    /*div logo menu*/
+    .toggle .logo {
+        width: 100px;
+    }
+
+    .slide h2 {
+        top: -12%;
+        left: 15%;
+    }
+}
+
 @media (max-width:730px) {
 
 
@@ -463,30 +490,4 @@ div p {
         font-size: 1em;
     }
 
-}
-@media (min-width:460px){
-    .slide h2 {
-        top: 12%;
-        left: 6%;
-    }
-}
-
-@media (min-width:550px) {
-
-    /*div menu*/
-    .toggle {
-        background-color: rgb(19, 17, 17);
-        width: 100%;
-        height: 111px;
-    }
-
-    /*div logo menu*/
-    .toggle .logo {
-        width: 100px;
-    }
-    
-.slide h2 {
-    top: -12%;
-    left: 15%;
-}
 }
