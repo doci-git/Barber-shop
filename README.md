@@ -1,3 +1,3 @@
 # Barber-shop
 https://doci-git.github.io/Barber-shop/
-only mobile version for now
+only mobile/tablet version for now, !!! work in progress !!!
