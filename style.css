@@ -476,12 +476,16 @@ div p {
 @media (min-width:731px) {
 
     /*button menu*/
+  
     .toggle button {
         margin: 20px;
         font-size: 2.5rem;
     }
 
     /*links menu*/
+    .showlinks{
+        height: 12rem;
+    }
     .list-menu {
         font-size: 26px;
     }
