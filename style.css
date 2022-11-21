@@ -476,18 +476,42 @@ div p {
 @media (min-width:731px) {
 
     /*button menu*/
-  
+
     .toggle button {
         margin: 20px;
         font-size: 2.5rem;
     }
 
     /*links menu*/
-    .showlinks{
+    .showlinks {
         height: 12rem;
     }
+
     .list-menu {
         font-size: 26px;
+    }
+
+    /*icon div*/
+    .icon-div {
+        padding-top: 28vh;
+    }
+
+    div header .text-homepage {
+        font-size: 14.5px;
+    }
+
+    h2 {
+        font-size: 25px;
+    }
+
+    /*text p inside all divs*/
+    div p {
+        font-size: 22px;
+        margin: 35px;
+    }
+    .capelli-barba {
+        width: 80%;
+        height: 60vh;
     }
 
     /*footer*/
