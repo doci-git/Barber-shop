@@ -227,7 +227,6 @@ div p {
     text-transform: uppercase;
     font-size: 15px;
     z-index: 999;
-    word-spacing: 8px;
 }
 
 .btn i {
@@ -509,9 +508,19 @@ div p {
         font-size: 22px;
         margin: 35px;
     }
+
     .capelli-barba {
         width: 80%;
         height: 60vh;
+    }
+
+    /*list prezi h2*/
+    .prezi {
+        font-size: 32px;
+    }
+
+    .section2 ul li {
+        font-size: 22px;
     }
 
     /*footer*/
@@ -519,6 +528,21 @@ div p {
         display: block;
         margin: 20px 0px;
         text-align: left;
+    }
+
+    /*buttone book*/
+    .btn {
+        font-size: 20px;
+    }
+
+    /*slide img*/
+    .slide {
+        top: -20%;
+    }
+
+    .slide h2 {
+        top: 25%;
+        font-size: 28px;
     }
 
     .footer .row a i {
