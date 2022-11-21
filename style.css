@@ -269,10 +269,9 @@ div p {
     text-shadow: 2px 2px 4px;
     position: absolute;
     color: #001300;
-    margin: 130px;
+    margin: 28%;
     font-size: 20px;
     font-family: "Noto Sans Mono", monospace;
-
 }
 
 .btn-container {
@@ -448,8 +447,8 @@ div p {
     }
 
     .slide h2 {
-        top: -12%;
-        left: 15%;
+        top: 14%;
+        font-size: 22px;
     }
 }
 
