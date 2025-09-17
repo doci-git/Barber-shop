@@ -8,7 +8,7 @@ const ADMIN_PASSWORD = "1234";
 // Configurazioni con valori di default
 let MAX_CLICKS = parseInt(localStorage.getItem("max_clicks")) || 5;
 let TIME_LIMIT_MINUTES =
-  parseInt(localStorage.getItem("time_limit_minutes")) || 10;
+  parseInt(localStorage.getItem("time_limit_minutes")) || 1;
 let CORRECT_CODE = localStorage.getItem("secret_code") || DEMO_CODE;
 
 // Variabili per l'orario di check-in (range)
