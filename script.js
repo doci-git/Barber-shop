@@ -67,6 +67,14 @@ function demoSimulateCode() {
   showDemoNotification("Codice inserito: " + DEMO_CODE);
 }
 
+function forceReset() {
+  // Cancella tutto il localStorage
+  localStorage.clear();
+
+  // Ricarica la pagina
+  location.reload();
+}
+
 function demoReset() {
   // Resetta tutto il localStorage relativo all'app
   const keysToRemove = [];
@@ -89,7 +97,7 @@ function demoReset() {
   }
 
   keysToRemove.forEach((key) => localStorage.removeItem(key));
-
+   localStorage.clear();
   // Resetta l'interfaccia
   document.getElementById("controlPanel").style.display = "none";
   document.getElementById("authCode").style.display = "block";
