@@ -1,219 +1,442 @@
 <!DOCTYPE html>
 <html lang="it">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>barber</title>
-    <script src="https://kit.fontawesome.com/aa7a81e6d4.js" crossorigin="anonymous"></script>
-
-    <link rel="stylesheet" href="style.css">
-</head>
-
-
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Zentry - Demo Check-in System</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Circular,-apple-system,BlinkMacSystemFont,Roboto,Helvetica Neue,sans-serif&display=swap"
+      rel="stylesheet"
+    />
+  </head>
 <body>
-    <div id="home" class="background">
-        <header>
-            <nav>
-                <div class="toggle">
-                    <button><i class="fa fa-bars"></i></button>
-                    <img class="logo" src="logo.jpg" alt="logo">
-
-                </div>
-                <ul class="links">
-                    <li class="list-menu"><a href="#home">home</a></li>
-                    <li class="list-menu"><a href="#chisiamo">chi siamo</a>
-                    </li>
-                    <li class="list-menu"><a href="#footer2">contati</a></li>
-                </ul>
-            </nav>
-
-            <h1>Barber-Shop <span>Samo</span></h1>
-            <p class="text-homepage">L’aspetto di un uomo è lo specchio della sua personalità e del suo carattere:</p>
-            <p class="text-homepage">per questo è importante curare il proprio look e prendersi cura di se stessi</p>
-            <div class="icon-div" id="start">
-                <a href="#start">
-                    <i class="fa-solid fa-angles-down"></i>
-                </a>
-
-            </div>
-
-        </header>
+    <div class="demo-banner">
+        <i class="fas fa-flask"></i> DEMO VERSION - Simulazione check-in
     </div>
-    <section class="section1">
-        <div>
-            <h2>servizi</h2>
-            <p>
-                Quando siedi su una delle nostre poltrone sarai al centro delle nostre attenzioni e faremo di tutto per
-                superare le tue aspettative mettendo in campo le tecniche acquisite in molti anni di formazione e
-                pratica.
-                L’esperienza sarà fondamentale per l’acquisizione e lo sviluppo di strumenti e tecniche che spaziano
-                dalla rasatura alla cura e foggiatura della barba. </p>
-
-
-        </div>
-        <br>
-        <br>
-        <div>
-            <img class="capelli-barba" src="foto/haircut.jpg" alt="">
-            <h2>Il taglio che volevi, come lo volevi</h2>
-            <p>
-                Sappiamo quanto sia importante sentirsi convinti del proprio taglio.
-                SAMO Barber realizza esattamente quello che cercavi.</p>
-
-
-        </div>
-        <br>
-        <div>
-            <img class="capelli-barba" src="foto/barba.jpg" alt="">
-            <h2>la barba perfetta tutti giorni</h2>
-            <p>Taglio a forbice e pettine seguito da regolazione completa della barba a forbice e rasoio con doppio
-                panno caldo. Balsamo ammorbidente barba a fine trattamento.
-                <br>
-                Taglio a forbice e pettine seguito da rasatura della barba tradizionale con olio pre-barba, panno caldo
-                e panno rinfrescante finale. Dopobarba a fine trattamento.
-            </p>
-
-
-        </div>
-
-    </section>
-    <section class="section2">
-        <div>
-            <h2 class="prezi">prezzi</h2>
-            <ul>
-                <li>taglio classico</li>
-                <li>20€</li>
-            </ul>
-            <ul>
-                <li>taglio luxury</li>
-                <li>25€</li>
-            </ul>
-            <ul>
-                <li>taglio junnior</li>
-                <li>18€</li>
-            </ul>
-            <ul>
-                <li>taglio a domicilio</li>
-                <li>30€</li>
-            </ul>
-            <ul>
-                <li>barba</li>
-                <li>10€</li>
-            </ul>
-            <ul>
-                <li>trattamento barba</li>
-                <li>15€</li>
-            </ul>
-            <ul>
-                <li>colore</li>
-                <li>10€</li>
-            </ul>
-            <br>
-        </div>
-    </section>
-    <section class="section" id="chisiamo">
-        <div class="about">
-            <h2>chi siamo</h2>
-            <p>
-                Samo barber e la barberia per eccelenza nata alla passione e alle competenze dei giovanissimi
-                imprenditori , che dal 2015 opera nel settore
-            </p>
-        </div>
-
-        <div class="slider-container">
-            <div class="slide">
-                <img src="galeria/foto1 (1).jpg" class="slide-img" alt="barber-samo">
-            </div>
-            <div class="slide">
-                <img src="galeria/foto1 (2).jpg" class="slide-img" alt="barber-samo">
-            </div>
-            <div class="slide">
-                <img src="galeria/foto1 (3).jpg" class="slide-img" alt="barber-samo">
-            </div>
-            <div class="slide">
-                <img src="galeria/foto1 (4).jpg" class="slide-img" alt="barber-samo">
-            </div>
-            <div class="slide">
-                <img src="galeria/foto1 (5).jpg" class="slide-img" alt="barber-samo">
-            </div>
-            <div class="slide">
-                <img src="galeria/foto1 (6).jpg" class="slide-img" alt="barber-samo">
-            </div>
-            <div class="slide">
-                <a href="https://instagram.com/samo.hairdresser?igshid=YmMyMTA2M2Y=">
-                    <h2>click for more</h2>
-                    <img src="galeria/insta.jpg" class="slide-img" alt="barber-samo">
-
-                </a>
-
-            </div>
-            <div class="btn-container">
-                <button type="button" class="prevBtn"><i class="fa-solid fa-arrow-left"></i></button>
-                <button type="button" class="nextBtn"><i class="fa-solid fa-arrow-right"></i></button>
-            </div>
-        </div>
-
-    </section>
-    <div class="button-book">
-        <a class="btn"
-            href="https://api.whatsapp.com/send?phone=+393249544633&text=ciao Samo hai disponiblita alle ore ...."><i
-                class="fa-brands fa-whatsapp"></i> prenota</a>
+    
+    <div class="demo-controls">
+        <h4><i class="fas fa-sliders-h"></i> Controlli Demo</h4>
+        <button class="demo-btn" onclick="demoSimulateCode()">Simula codice 1234</button>
+        
+        <button class="demo-btn" onclick="demoExpireSession()">Simula scadenza</button>
+        <button class="demo-btn" onclick="demoReset()">Reset Demo</button>
     </div>
 
-    <footer id="footer2">
-        <div class="subscribe">
-            <p class="subscribe__copy">Inscriviti per restare aggiornato
+    <div id="expiredOverlay" class="expired-overlay hidden">
+        <i
+            class="fas fa-shield-alt"
+            style="font-size: 4rem; margin-bottom: 20px; color: #ff5a5f"
+        ></i>
+        <h2>Access Expired</h2>
+        <p>The security session has expired. Access has been disabled.</p>
+        <p>404 error</p>
+
+        <a
+            class="btn btn-whatsapp"
+            href="#"
+        >
+            <i class="fab fa-whatsapp"></i> Need Assistance
+        </a>
+
+        <button class="demo-btn" onclick="demoReset()">Reset Demo</button>
+    </div>
+
+    <div class="container">
+        <div class="card fade-in">
+            <div class="header">
+                <h1 class="logo">Zentry</h1>
+                <div class="subtitle">Sistema di Check-in Intelligente</div>
+            </div>
+            
+            <div class="stats-container">
+                <div class="stat">
+                    <div class="stat-number">98%</div>
+                    <div class="stat-label">Check-in senza problemi</div>
+                </div>
+                <!-- <div class="stat">
+                    <div class="stat-number">24/7</div>
+                    <div class="stat-label">Assistenza remota</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">500+</div>
+                    <div class="stat-label">Check-in gestiti</div>
+                </div> -->
+            </div>
+            
+            <div class="demo-features">
+                <div class="demo-feature">
+                    <i class="fas fa-door-open"></i>
+                    <h3>Accesso Remoto</h3>
+                    <p>Apri le porte da qualsiasi luogo con un clic</p>
+                </div>
+                <div class="demo-feature">
+                    <i class="fas fa-clock"></i>
+                    <h3>Programmazione</h3>
+                    <p>Definisci orari di check-in personalizzati</p>
+                </div>
+                <div class="demo-feature">
+                    <i class="fas fa-shield-alt"></i>
+                    <h3>Sicuro</h3>
+                    <p>Codici temporanei e limiti di utilizzo</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="card fade-in">
+            <div class="card-title">
+                <i class="fas fa-door-open"></i>
+                Check-in Guide
+            </div>
+
+            <div class="video-container">
+                <video controls onloadstart="this.volume=0.1">
+                    <source src="check-in4.mp4" type="video/mp4" />
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+        </div>
+
+        <div class="card fade-in" id="test2">
+            <div class="auth-container">
+                <div class="card-title1">
+                    <i class="fas fa-key"></i>
+                    Door Access
+                </div>
+
+                <div class="auth-form" id="auth-form">
+                    <div class="input-group">
+                        <input
+                            type="number"
+                            id="authCode"
+                            placeholder="Enter the access code we sent you"
+                            inputmode="numeric"
+                            pattern="[0-9]*"
+                        />
+                    </div>
+                    <button id="btnCheckCode" class="btn pulse">
+                        <i class="fas fa-unlock-alt"></i> Submit Code
+                    </button>
+                </div>
+
+                <div id="controlPanel" class="control-panel">
+                    <div class="door-control fade-in">
+                        <h3><i class="fas fa-building"></i> Main Entrance Door</h3>
+                        <button id="MainDoor" class="btn">
+                            <i class="fas fa-key"></i> Unlock Main Door
+                        </button>
+                    </div>
+
+                    <div class="door-control fade-in">
+                        <h3><i class="fas fa-home"></i> Apartment Door</h3>
+                        <button id="AptDoor" class="btn">
+                            <i class="fas fa-key"></i> Unlock Apartment Door
+                        </button>
+                    </div>
+
+                    <div
+                        id="ExtraDoor1Container"
+                        class="door-control fade-in"
+                        style="display: none"
+                    >
+                        <h3><i class="fas fa-door-open"></i> Extra Door 1</h3>
+                        <button id="ExtraDoor1" class="btn">
+                            <i class="fas fa-key"></i> Unlock Extra Door 1
+                        </button>
+                    </div>
+
+                    <div
+                        id="ExtraDoor2Container"
+                        class="door-control fade-in"
+                        style="display: none"
+                    >
+                        <h3><i class="fas fa-door-open"></i> Extra Door 2</h3>
+                        <button id="ExtraDoor2" class="btn">
+                            <i class="fas fa-key"></i> Unlock Extra Door 2
+                        </button>
+                    </div>
+
+                    <div class="warning-box" id="warning-box">
+                        <h5>
+                            <i class="fas fa-exclamation-triangle"></i> Limited Access
+                        </h5>
+                        <p>
+                            Each button can be used a maximum of <strong>2 times</strong>.
+                            Please use it only for check-in. <br /><br />
+                            Access will automatically expire 12 hours after the first click.
+                        </p>
+                    </div>
+
+                    <br />
+
+                    <!-- Informazioni sull'orario di check-in -->
+                    <div id="checkinTimeInfo" class="time-info" style="display: none">
+                        <p>
+                            <i class="fas fa-info-circle"></i>
+                            <strong>Check-in Time Range:</strong> from
+                            <span id="checkinStartDisplay">14:00</span> until
+                            <span id="checkinEndDisplay">22:00</span>
+                        </p>
+                        <p id="currentTimeStatus"></p>
+                    </div>
+                </div>
+
+                <div id="sessionExpired" class="session-expired hidden">
+                    <h3><i class="fas fa-clock"></i> Session Expired</h3>
+                    <p>
+                        Access has been disabled for security reasons. To unlock the doors
+                        again, request a new access code.
+                    </p>
+                    <a
+                        class="btn btn-whatsapp"
+                        href="#"
+                    >
+                        <i class="fab fa-whatsapp"></i> Request Assistance
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Popups -->
+        <div id="popup-MainDoor" class="popup">
+            <div class="popup-content">
+                <h2><i class="fas fa-building"></i> Main Door</h2>
+                <p id="popup-text-MainDoor"></p>
+                <button class="btn" onclick="closePopup('MainDoor')">
+                    <i class="fas fa-times"></i> Close
+                </button>
+            </div>
+        </div>
+
+        <div id="popup-AptDoor" class="popup">
+            <div class="popup-content">
+                <h2><i class="fas fa-home"></i> Apartment Door</h2>
+                <p id="popup-text-AptDoor"></p>
+                <button class="btn" onclick="closePopup('AptDoor')">
+                    <i class="fas fa-times"></i> Close
+                </button>
+            </div>
+        </div>
+
+        <div id="popup-ExtraDoor1" class="popup">
+            <div class="popup-content">
+                <h2><i class="fas fa-door-open"></i> Extra Door 1</h2>
+                <p id="popup-text-ExtraDoor1"></p>
+                <button class="btn" onclick="closePopup('ExtraDoor1')">
+                    <i class="fas fa-times"></i> Close
+                </button>
+            </div>
+        </div>
+
+        <div id="popup-ExtraDoor2" class="popup">
+            <div class="popup-content">
+                <h2><i class="fas fa-door-open"></i> Extra Door 2</h2>
+                <p id="popup-text-ExtraDoor2"></p>
+                <button class="btn" onclick="closePopup('ExtraDoor2')">
+                    <i class="fas fa-times"></i> Close
+                </button>
+            </div>
+        </div>
+
+        <!-- Popup di conferma -->
+        <div id="confirmationPopup" class="popup">
+            <div class="popup-content">
+                <h2><i class="fas fa-question-circle"></i> Confirm Action</h2>
+                <p id="confirmationMessage">
+                    Are you sure you want to unlock this door?
+                </p>
+                <button id="confirmYes" class="btn">Yes, unlock</button>
+                <br /><br />
+                <button id="confirmNo" class="btn btn-secondary">Cancel</button>
+            </div>
+        </div>
+
+        <!-- Popup per check-in troppo presto -->
+        <div id="earlyCheckinPopup" class="popup">
+            <div class="popup-content">
+                <h2><i class="fas fa-clock"></i> Check-in Time</h2>
+                <p>
+                    Check-in is available starting from
+                    <span id="checkinTimePopup">14:00</span>.
+                </p>
+                <p>Please try again later.</p>
+                <button class="btn" onclick="closePopup('earlyCheckin')">
+                    <i class="fas fa-times"></i> Close
+                </button>
+            </div>
+        </div>
+
+        <div class="card important fade-in" id="important">
+            <h3>
+                <i class="fas fa-exclamation-circle"></i> IMPORTANT LEGAL REQUIREMENT
+            </h3>
+            <p>
+                Before sending the access code, according to Italian law, I must
+                register all guests on the official tourist portal. Please send me
+                photos of everyone's passports via Airbnb/Booking messaging or
+                WhatsApp.
             </p>
-            <div class="form">
-                <input type="email" class="form__email" placeholder="Enter your email address">
-                <button class="form__button">Send</button>
+        </div>
+        <br />
+        <div class="">
+            <div class="contact-section">
+                <h3>Need Assistance?</h3>
+                <p>Contact us directly for support</p>
+                <a
+                    class="contact-btn"
+                    href="#"
+                >
+                    <i class="fab fa-whatsapp"></i>
+                </a>
             </div>
         </div>
 
-        <div class="iformazioni">
-            <a href="#top">
-                <img src="logo.jpg" class="logo-footer" alt="logo ab neri"></a>
-            <h3>SAMO BARBER</h3>
-            <br>
+        <div style="text-align: center; margin: 20px 0">
+            <a href="#wifi-popup" class="btn btn-secondary">
+                <i class="fas fa-wifi"></i> Wi-Fi Information
+            </a>
+        </div>
 
-            <div class="footer">
-                <div class="row">
-                    <ul>
-                        <li><a href="#home">Home</a></li>
-                        <li><a href=""></a>cell...</li>
-                        <li><a href="#"></a>indirizzo....</li>
-                    </ul>
-                </div>
-                <br>
-                <div class="row">
-                    <ul>
-                        <li class="h33">orario</li>
-                        <li>Da Martedi a Sabato</li>
-                        <li> 09:00-19:30</li>
+        <div id="wifi-popup" class="wifi-popup">
+            <div class="wifi-popup-content">
+                <a href="#" class="wifi-popup-close">&times;</a>
+                <h3>Wi-Fi Information</h3>
+                <p>
+                    If you don't have mobile internet when you arrive, you can still
+                    connect to our Wi-Fi standing in front door.
+                </p>
 
-                    </ul>
-                </div>
-                <div class="row">
-                    <a href="contact.html"><i class="fa-brands fa-whatsapp"></i></a>
-                    <a href="https://instagram.com/samo.hairdresser?igshid=YmMyMTA2M2Y="><i
-                            class="fa fa-instagram"></i></a>
-                    <a href="contact.html"><i class="fa-brands fa-linkedin"></i></a>
-
-                </div>
-
-                <div class="row">
-                    <p>Samo Barber-Shop Copyright © <span class="date">2022</span> - All rights reserved || Designed By:
-                        <a href=" https://doci-git.github.io/Portofolio-Doci.Musa/" class="creator">Musa</a> </p>
+                <div class="wifi-info">
+                    <strong>Network Name:</strong>
+                    Vodafone-E45457264
+                    <br /><br />
+                    <strong>Password:</strong>
+                    JxPdn3db7C2nPGnc
                 </div>
             </div>
         </div>
 
-    </footer>
+        <footer class="footer">
+            <p>© 2025 Zentry - All rights reserved</p>
+            <button id="toggleAdmin" class="admin-toggle">⚙️ Admin</button>
+        </footer>
 
+        <!-- Admin Area (hidden) -->
+        <div id="adminArea" class="admin-area">
+            <div id="adminLogin">
+                <h3><i class="fas fa-lock"></i> Admin Login</h3>
+                <div class="input-group">
+                    <input
+                        type="password"
+                        id="adminPass"
+                        placeholder="Admin Password (1234)"
+                    />
+                </div>
+                <button id="btnAdminLogin" class="btn">Login</button>
+            </div>
 
+            <div id="adminPanel" class="admin-panel" style="display: none">
+                <div class="admin-section">
+                    <h3><i class="fas fa-key"></i> Secret Code Management</h3>
+                    <p>
+                        Current code: <strong><span id="currentCode"></span></strong>
+                    </p>
+                    <p>
+                        Code version:
+                        <strong><span id="currentCodeVersion"></span></strong>
+                    </p>
+                    <div class="input-group">
+                        <input type="text" id="newCode" placeholder="New Code" />
+                    </div>
+                    <button id="btnCodeUpdate" class="btn">Update Code</button>
+                </div>
+
+                <div class="admin-section">
+                    <h3><i class="fas fa-cog"></i> System Settings</h3>
+                    <p>
+                        Current max clicks:
+                        <strong><span id="currentMaxClicks"></span></strong>
+                    </p>
+                    <div class="input-group">
+                        <input
+                            type="number"
+                            id="newMaxClicks"
+                            placeholder="New max clicks"
+                            min="1"
+                        />
+                    </div>
+
+                    <p>
+                        Current time limit (minutes):
+                        <strong><span id="currentTimeLimit"></span></strong>
+                    </p>
+                    <div class="input-group">
+                        <input
+                            type="number"
+                            id="newTimeLimit"
+                            placeholder="New time limit (minutes)"
+                            min="1"
+                        />
+                    </div>
+
+                    <button id="btnSettingsUpdate" class="btn">Update Settings</button>
+                </div>
+
+                <div class="admin-section">
+                    <h3><i class="fas fa-clock"></i> Check-in Time Settings</h3>
+                    <p>
+                        Current check-in time range:
+                        <strong
+                            ><span id="currentCheckinStartTime">14:00</span> -
+                            <span id="currentCheckinEndTime">22:00</span></strong
+                        >
+                    </p>
+
+                    <div class="time-range-inputs">
+                        <div class="input-group">
+                            <label for="checkinStartTime">Check-in start time:</label>
+                            <input type="time" id="checkinStartTime" value="14:00" />
+                        </div>
+
+                        <div class="input-group">
+                            <label for="checkinEndTime">Check-in end time:</label>
+                            <input type="time" id="checkinEndTime" value="22:00" />
+                        </div>
+
+                        <div id="timeRangeError" class="admin-notification">
+                            <p>
+                                <i class="fas fa-exclamation-circle"></i> End time must be
+                                after start time
+                            </p>
+                        </div>
+
+                        <button id="btnUpdateCheckinTime" class="btn">
+                            Update Check-in Time
+                        </button>
+                    </div>
+                </div>
+
+                <div class="admin-section">
+                    <p>
+                        <i class="fas fa-exclamation-circle"></i> Deactivate time range to allow access at any time
+                    </p>
+                    <button
+                        id="btnToggleCheckinTime"
+                        class="btn"
+                        style="margin-top: 10px"
+                    >
+                        Toggle Check-in Time
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
     <script src="script.js"></script>
-</body>
-
+  </body>
 </html>
