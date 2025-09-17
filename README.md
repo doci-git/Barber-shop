@@ -1,6 +1,6 @@
 
 check-in info
-https://doci-git.github.io/Zentry-Demo-version/
+https://doci-git.github.io/Zentry-Demo-Version/
 
 
 # Zentry
