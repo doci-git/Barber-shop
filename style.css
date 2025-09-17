@@ -58,6 +58,7 @@
             box-shadow: 0 4px 12px rgba(0,0,0,0.3);
             border: 1px solid var(--dark-border);
             max-width: 300px;
+            z-index: 10000;
         }
 
         .demo-controls h4 {

@@ -8,7 +8,7 @@ const ADMIN_PASSWORD = "1234";
 // Configurazioni con valori di default
 let MAX_CLICKS = parseInt(localStorage.getItem("max_clicks")) || 5;
 let TIME_LIMIT_MINUTES =
-  parseInt(localStorage.getItem("time_limit_minutes")) || 1;
+  parseInt(localStorage.getItem("time_limit_minutes")) || 10;
 let CORRECT_CODE = localStorage.getItem("secret_code") || DEMO_CODE;
 
 // Variabili per l'orario di check-in (range)
@@ -208,14 +208,14 @@ async function setUsageStartTime() {
   const now = Date.now().toString();
   const hash = await generateHash(now + "demo_secret_key");
   setStorage("usage_start_time", now, TIME_LIMIT_MINUTES);
-  setStorage("usage_hash", hash, TIME_LIMIT_MINUTES);
+  // setStorage("usage_hash", hash, TIME_LIMIT_MINUTES);
 }
 
 async function checkTimeLimit() {
   const startTime = getStorage("usage_start_time");
-  const storedHash = getStorage("usage_hash");
+  // const storedHash = getStorage("usage_hash");
 
-  if (!startTime || !storedHash) return false;
+  // if (!startTime || !storedHash) return true;
 
   // const calcHash = await generateHash(startTime + "demo_secret_key");
   // if (calcHash !== storedHash) {
@@ -241,7 +241,7 @@ function showFatalError(message) {
                     position: fixed; top: 0; left: 0; width: 100%; height: 100vh;
                     display: flex; justify-content: center; align-items: center;
                     background: #121111; color: #ff6b6b; font-size: 24px; text-align: center;
-                    padding: 20px; z-index: 9999;">
+                    padding: 20px; z-index: 999;">
                     ${message}
                 </div>`;
 }
