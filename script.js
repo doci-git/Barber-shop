@@ -114,7 +114,7 @@ function demoReset() {
   CHECKIN_START_TIME = "14:00";
   CHECKIN_END_TIME = "22:00";
   CHECKIN_TIME_ENABLED = true;
-
+location.reload();
 
   appState = {
     usageStartTime: null,
