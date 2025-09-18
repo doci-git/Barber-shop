@@ -21,13 +21,21 @@
         <i class="fas fa-flask"></i> DEMO VERSION - Simulazione check-in
     </div>
     
+     
     <div class="demo-controls">
         <h4><i class="fas fa-sliders-h"></i> Controlli Demo</h4>
         <button class="demo-btn" onclick="demoSimulateCode()">Simula codice 1234</button>
-        
         <button class="demo-btn" onclick="demoExpireSession()">Simula scadenza</button>
         <button class="demo-btn" onclick="demoReset()">Reset Demo</button>
+        <!-- <button class="demo-btn" onclick="demoAddClicks()">+2 Clicks alle porte</button> -->
+        <!-- <button class="demo-btn" onclick="demoExtendTime()">+30 minuti tempo</button> -->
     </div>
+
+    <!-- Aggiungi questo elemento per le notifiche -->
+    <div id="demoNotification" class="demo-notification hidden">
+        <span id="demoNotificationText"></span>
+    </div>
+
 
     <div id="expiredOverlay" class="expired-overlay hidden">
         <i

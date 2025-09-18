@@ -1,33 +1,35 @@
 // =============================================
-// DEMO MODE CONFIGURATION
+// DEMO MODE CONFIGURATION - NO LOCALSTORAGE
 // =============================================
 const DEMO_MODE = true;
 const DEMO_CODE = "1234";
 const ADMIN_PASSWORD = "1234";
 
-// Configurazioni con valori di default
-let MAX_CLICKS = parseInt(localStorage.getItem("max_clicks")) || 2;
-let TIME_LIMIT_MINUTES =
-  parseInt(localStorage.getItem("time_limit_minutes")) || 1;
-let CORRECT_CODE = localStorage.getItem("secret_code") || DEMO_CODE;
+// Configurazioni con valori di default (in memoria)
+let MAX_CLICKS = 2;
+let TIME_LIMIT_MINUTES = 2;
+let CORRECT_CODE = DEMO_CODE;
 
 // Variabili per l'orario di check-in (range)
-let CHECKIN_START_TIME = localStorage.getItem("checkin_start_time") || "14:00";
-let CHECKIN_END_TIME = localStorage.getItem("checkin_end_time") || "22:00";
-let CHECKIN_TIME_ENABLED = localStorage.getItem("checkin_time_enabled");
-if (CHECKIN_TIME_ENABLED === null) {
-  CHECKIN_TIME_ENABLED = true;
-} else {
-  CHECKIN_TIME_ENABLED = CHECKIN_TIME_ENABLED === "true";
-}
+let CHECKIN_START_TIME = "14:00";
+let CHECKIN_END_TIME = "22:00";
+let CHECKIN_TIME_ENABLED = true;
+
+// Stato dell'applicazione (in memoria invece di localStorage)
+let appState = {
+  usageStartTime: null,
+  clicks: {
+    MainDoor: MAX_CLICKS,
+    AptDoor: MAX_CLICKS,
+    ExtraDoor1: MAX_CLICKS,
+    ExtraDoor2: MAX_CLICKS,
+  },
+  codeVersion: 1,
+};
 
 // Variabili di stato
 let timeCheckInterval;
 let currentDevice = null;
-
-// Gestione versione codice
-const CODE_VERSION_KEY = "code_version";
-let currentCodeVersion = parseInt(localStorage.getItem(CODE_VERSION_KEY)) || 1;
 
 // Dispositivi demo
 const DEVICES = [
@@ -58,7 +60,7 @@ const DEVICES = [
 ];
 
 // =============================================
-// FUNZIONI DI SUPPORTO PER DEMO
+// FUNZIONI DI SUPPORTO PER DEMO (MIGLIORATE)
 // =============================================
 
 function demoSimulateCode() {
@@ -67,37 +69,63 @@ function demoSimulateCode() {
   showDemoNotification("Codice inserito: " + DEMO_CODE);
 }
 
-function forceReset() {
-  // Cancella tutto il localStorage
-  localStorage.clear();
+function demoAddClicks() {
+  DEVICES.forEach((device) => {
+    if (appState.clicks[device.button_id] !== undefined) {
+      appState.clicks[device.button_id] += 2;
+      updateButtonState(device);
+    }
+  });
+  showDemoNotification("+2 click aggiunti a tutte le porte");
+}
 
-  // Ricarica la pagina
-  location.reload();
+function demoExtendTime() {
+  TIME_LIMIT_MINUTES += 30;
+
+  // Se c'è una sessione attiva, estendi il tempo
+  if (appState.usageStartTime) {
+    const now = Date.now();
+    const elapsed = (now - appState.usageStartTime) / (1000 * 60);
+    const remaining = TIME_LIMIT_MINUTES - elapsed;
+
+    if (remaining > 0) {
+      showDemoNotification(
+        `Tempo esteso: ${Math.round(remaining)} minuti rimanenti`
+      );
+    } else {
+      showDemoNotification("Tempo esteso di 30 minuti");
+    }
+  } else {
+    showDemoNotification(
+      "Tempo limite esteso a " + TIME_LIMIT_MINUTES + " minuti"
+    );
+  }
+}
+
+function forceReset() {
+  demoReset();
 }
 
 function demoReset() {
-  // Resetta tutto il localStorage relativo all'app
-  const keysToRemove = [];
-  for (let i = 0; i < localStorage.length; i++) {
-    const key = localStorage.key(i);
-    if (
-      key.startsWith("clicks_") ||
-      key === "usage_start_time" ||
-      key === "usage_hash" ||
-      key === "max_clicks" ||
-      key === "time_limit_minutes" ||
-      key === "secret_code" ||
-      key === "code_version" ||
-      key === "checkin_start_time" ||
-      key === "checkin_end_time" ||
-      key === "checkin_time_enabled"
-    ) {
-      keysToRemove.push(key);
-    }
-  }
+  // Resetta tutto lo stato
+  MAX_CLICKS = 2;
+  TIME_LIMIT_MINUTES = 2;
+  CORRECT_CODE = DEMO_CODE;
+  CHECKIN_START_TIME = "14:00";
+  CHECKIN_END_TIME = "22:00";
+  CHECKIN_TIME_ENABLED = true;
+  location.reload(),
+    (appState = {
+      usageStartTime: null,
+      clicks: {
+        MainDoor: MAX_CLICKS,
+        AptDoor: MAX_CLICKS,
+        ExtraDoor1: MAX_CLICKS,
+        ExtraDoor2: MAX_CLICKS,
+      },
+      codeVersion: 1,
+    });
 
-  keysToRemove.forEach((key) => localStorage.removeItem(key));
-   localStorage.clear();
   // Resetta l'interfaccia
   document.getElementById("controlPanel").style.display = "none";
   document.getElementById("authCode").style.display = "block";
@@ -108,24 +136,24 @@ function demoReset() {
   document.getElementById("expiredOverlay").classList.add("hidden");
   document.getElementById("authCode").value = "";
 
-  // Ricarica le variabili con i valori di default
-  MAX_CLICKS = 2;
-  TIME_LIMIT_MINUTES = 2;
-  CORRECT_CODE = DEMO_CODE;
-  CHECKIN_START_TIME = "14:00";
-  CHECKIN_END_TIME = "22:00";
-  CHECKIN_TIME_ENABLED = true;
-
-  showDemoNotification("Demo resettata con successo");
-
   // Aggiorna lo stato dei pulsanti
   DEVICES.forEach(updateButtonState);
+
+  // Aggiorna pannello admin se visibile
+  if (document.getElementById("adminPanel").style.display === "block") {
+    document.getElementById("currentCode").textContent = CORRECT_CODE;
+    document.getElementById("currentMaxClicks").textContent = MAX_CLICKS;
+    document.getElementById("currentTimeLimit").textContent =
+      TIME_LIMIT_MINUTES;
+    updateCheckinTimeDisplay();
+  }
+
+  showDemoNotification("Demo resettata con successo");
 }
 
 function demoExpireSession() {
   // Imposta il tempo di inizio a 24 ore fa per forzare la scadenza
-  const yesterday = Date.now() - 24 * 60 * 60 * 1000;
-  localStorage.setItem("usage_start_time", yesterday.toString());
+  appState.usageStartTime = Date.now() - 24 * 60 * 60 * 1000;
 
   // Forza il controllo
   checkTimeLimit();
@@ -133,106 +161,43 @@ function demoExpireSession() {
 }
 
 function showDemoNotification(message) {
-  // Crea una notifica temporanea
-  const notification = document.createElement("div");
-  notification.textContent = message;
-  notification.style.position = "fixed";
-  notification.style.bottom = "20px";
-  notification.style.left = "50%";
-  notification.style.transform = "translateX(-50%)";
-  notification.style.backgroundColor = "var(--demo)";
-  notification.style.color = "white";
-  notification.style.padding = "10px 20px";
-  notification.style.borderRadius = "5px";
-  notification.style.zIndex = "10000";
-  notification.style.boxShadow = "0 3px 10px rgba(0,0,0,0.3)";
+  const notification = document.getElementById("demoNotification");
+  const notificationText = document.getElementById("demoNotificationText");
 
-  document.body.appendChild(notification);
+  notificationText.textContent = message;
+  notification.classList.remove("hidden");
 
   // Rimuovi la notifica dopo 3 secondi
   setTimeout(() => {
-    document.body.removeChild(notification);
-  }, 3000);
+    notification.classList.add("hidden");
+  }, 1000);
 }
 
 // =============================================
-// FUNZIONI DI STORAGE (localStorage e cookie)
+// FUNZIONI DI GESTIONE STATO (IN MEMORIA)
 // =============================================
 
-function setStorage(key, value, minutes) {
-  try {
-    localStorage.setItem(key, value);
-    const expirationDate = new Date();
-    expirationDate.setTime(expirationDate.getTime() + minutes * 60 * 1000);
-    const expires = "expires=" + expirationDate.toUTCString();
-    document.cookie = `${key}=${value}; ${expires}; path=/; SameSite=Strict`;
-  } catch (error) {
-    console.error("Errore nel salvataggio dei dati:", error);
+function getClicksLeft(deviceId) {
+  return appState.clicks[deviceId] !== undefined
+    ? appState.clicks[deviceId]
+    : MAX_CLICKS;
+}
+
+function setClicksLeft(deviceId, count) {
+  if (appState.clicks[deviceId] !== undefined) {
+    appState.clicks[deviceId] = count;
   }
 }
-
-function getStorage(key) {
-  try {
-    const localValue = localStorage.getItem(key);
-    if (localValue !== null) return localValue;
-
-    const cookies = document.cookie.split(";");
-    for (let cookie of cookies) {
-      const [name, value] = cookie.trim().split("=");
-      if (name === key) return value;
-    }
-  } catch (error) {
-    console.error("Errore nel recupero dei dati:", error);
-  }
-  return null;
-}
-
-function clearStorage(key) {
-  try {
-    localStorage.removeItem(key);
-    document.cookie = `${key}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
-  } catch (error) {
-    console.error("Errore nella rimozione dei dati:", error);
-  }
-}
-
-// =============================================
-// FUNZIONI DI SICUREZZA E CRITTOGRAFIA
-// =============================================
-
-async function generateHash(str) {
-  const encoder = new TextEncoder();
-  const data = encoder.encode(str);
-  const hashBuffer = await crypto.subtle.digest("SHA-256", data);
-  const hashArray = Array.from(new Uint8Array(hashBuffer));
-  return hashArray.map((b) => b.toString(16).padStart(2, "0")).join("");
-}
-
-// =============================================
-// GESTIONE TEMPO E SESSIONE
-// =============================================
 
 async function setUsageStartTime() {
-  const now = Date.now().toString();
-  const hash = await generateHash(now + "demo_secret_key");
-  setStorage("usage_start_time", now, TIME_LIMIT_MINUTES);
-  // setStorage("usage_hash", hash, TIME_LIMIT_MINUTES);
+  appState.usageStartTime = Date.now();
 }
 
 async function checkTimeLimit() {
-  const startTime = getStorage("usage_start_time");
-  // const storedHash = getStorage("usage_hash");
-
-  // if (!startTime || !storedHash) return true;
-
-  // const calcHash = await generateHash(startTime + "demo_secret_key");
-  // if (calcHash !== storedHash) {
-  //   showFatalError("⚠️ Violazione di sicurezza rilevata!");
-  //   return true;
-  // }
+  if (!appState.usageStartTime) return false;
 
   const now = Date.now();
-  const minutesPassed = (now - parseInt(startTime, 10)) / (1000 * 60);
+  const minutesPassed = (now - appState.usageStartTime) / (1000 * 60);
 
   if (minutesPassed >= TIME_LIMIT_MINUTES) {
     showSessionExpired();
@@ -240,18 +205,6 @@ async function checkTimeLimit() {
   }
 
   return false;
-}
-
-function showFatalError(message) {
-  clearInterval(timeCheckInterval);
-  document.body.innerHTML = `
-                <div style="
-                    position: fixed; top: 0; left: 0; width: 100%; height: 100vh;
-                    display: flex; justify-content: center; align-items: center;
-                    background: #121111; color: #ff6b6b; font-size: 24px; text-align: center;
-                    padding: 20px; z-index: 999;">
-                    ${message}
-                </div>`;
 }
 
 function showSessionExpired() {
@@ -393,30 +346,25 @@ function closeEarlyCheckinPopup() {
 // GESTIONE INTERFACCIA E STATO
 // =============================================
 
-function getClicksLeft(key) {
-  const stored = getStorage(key);
-  return stored === null ? MAX_CLICKS : parseInt(stored, 10);
-}
-
-function setClicksLeft(key, count) {
-  setStorage(key, count.toString(), TIME_LIMIT_MINUTES);
-}
-
 function updateButtonState(device) {
   const btn = document.getElementById(device.button_id);
   if (!btn) return;
 
-  const clicksLeft = getClicksLeft(device.storage_key);
+  const clicksLeft = getClicksLeft(device.button_id);
   btn.disabled = clicksLeft <= 0 || !isCheckinTime();
 
+  // Aggiungi effetto visivo per click esauriti
   if (clicksLeft <= 0) {
     btn.classList.add("btn-error");
     btn.classList.remove("btn-success");
+    btn.innerHTML = `<i class="fas fa-lock"></i> No Clicks Left`;
   } else if (!isCheckinTime()) {
     btn.classList.remove("btn-error", "btn-success");
+    btn.innerHTML = `<i class="fas fa-clock"></i> Check-in Time Only`;
   } else {
     btn.classList.add("btn-success");
     btn.classList.remove("btn-error");
+    btn.innerHTML = `<i class="fas fa-key"></i> Unlock (${clicksLeft} left)`;
   }
 }
 
@@ -467,14 +415,14 @@ function showDevicePopup(device, clicksLeft) {
   if (text) {
     if (clicksLeft > 0) {
       text.innerHTML = `
-                        <i class="fas fa-check-circle" style="color:#4CAF50;font-size:2.5rem;margin-bottom:15px;"></i>
-                        <div><strong>${clicksLeft}</strong> Click Left</div>
-                        <div style="margin-top:10px;font-size:1rem;">Door Unlocked!</div>`;
+                <i class="fas fa-check-circle" style="color:#4CAF50;font-size:2.5rem;margin-bottom:15px;"></i>
+                <div><strong>${clicksLeft}</strong> Click Left</div>
+                <div style="margin-top:10px;font-size:1rem;">Door Unlocked!</div>`;
     } else {
       text.innerHTML = `
-                        <i class="fas fa-exclamation-triangle" style="color:#FFC107;font-size:2.5rem;margin-bottom:15px;"></i>
-                        <div><strong>No more clicks left!</strong></div>
-                        <div style="margin-top:10px;font-size:1rem;">Contact for Assistance.</div>`;
+                <i class="fas fa-exclamation-triangle" style="color:#FFC107;font-size:2.5rem;margin-bottom:15px;"></i>
+                <div><strong>No more clicks left!</strong></div>
+                <div style="margin-top:10px;font-size:1rem;">Contact for Assistance.</div>`;
     }
   }
 
@@ -500,7 +448,7 @@ async function activateDevice(device) {
     return;
   }
 
-  let clicksLeft = getClicksLeft(device.storage_key);
+  let clicksLeft = getClicksLeft(device.button_id);
   if (clicksLeft <= 0) {
     showDevicePopup(device, clicksLeft);
     updateButtonState(device);
@@ -508,8 +456,15 @@ async function activateDevice(device) {
   }
 
   clicksLeft--;
-  setClicksLeft(device.storage_key, clicksLeft);
+  setClicksLeft(device.button_id, clicksLeft);
   updateButtonState(device);
+
+  // Aggiungi effetto di animazione al pulsante
+  const btn = document.getElementById(device.button_id);
+  if (btn) {
+    btn.classList.add("click-effect");
+    setTimeout(() => btn.classList.remove("click-effect"), 500);
+  }
 
   // SIMULAZIONE PER DEMO (nessuna chiamata API reale)
   showDemoNotification("Simulazione apertura: " + device.button_id);
@@ -529,7 +484,7 @@ function showAdminPanel() {
   document.getElementById("adminPanel").style.display = "block";
   document.getElementById("currentCode").textContent = CORRECT_CODE;
   document.getElementById("currentCodeVersion").textContent =
-    currentCodeVersion;
+    appState.codeVersion;
   document.getElementById("currentMaxClicks").textContent = MAX_CLICKS;
   document.getElementById("currentTimeLimit").textContent = TIME_LIMIT_MINUTES;
   document.getElementById("newMaxClicks").value = MAX_CLICKS;
@@ -563,31 +518,33 @@ function handleAdminLogin() {
   if (pass === ADMIN_PASSWORD) {
     showAdminPanel();
   } else {
-    alert("Password admin errata! Usa 1122");
+    // Aggiungi effetto shake per password errata
+    const input = document.getElementById("adminPass");
+    input.classList.add("shake");
+    setTimeout(() => input.classList.remove("shake"), 500);
+    showDemoNotification("Password admin errata! Usa 1234");
   }
 }
 
 function handleCodeUpdate() {
   const newCode = document.getElementById("newCode").value.trim();
   if (!newCode) {
-    alert("Inserisci un codice valido");
+    showDemoNotification("Inserisci un codice valido");
     return;
   }
 
   CORRECT_CODE = newCode;
-  localStorage.setItem("secret_code", newCode);
-  currentCodeVersion += 1;
-  localStorage.setItem(CODE_VERSION_KEY, currentCodeVersion.toString());
+  appState.codeVersion += 1;
+
+  // Resetta lo stato dell'applicazione
+  appState.usageStartTime = null;
+  DEVICES.forEach((device) => {
+    appState.clicks[device.button_id] = MAX_CLICKS;
+  });
 
   document.getElementById("currentCode").textContent = CORRECT_CODE;
   document.getElementById("currentCodeVersion").textContent =
-    currentCodeVersion;
-
-  clearStorage("usage_start_time");
-  clearStorage("usage_hash");
-  DEVICES.forEach((device) => {
-    clearStorage(device.storage_key);
-  });
+    appState.codeVersion;
 
   document.getElementById("controlPanel").style.display = "none";
   document.getElementById("authCode").style.display = "block";
@@ -595,8 +552,8 @@ function handleCodeUpdate() {
   document.getElementById("btnCheckCode").style.display = "block";
   document.getElementById("important").style.display = "block";
 
-  alert(
-    "Codice aggiornato con successo! Tutti gli utenti dovranno inserire il nuovo codice."
+  showDemoNotification(
+    "Codice aggiornato! Tutti gli utenti dovranno inserire il nuovo codice."
   );
 }
 
@@ -605,33 +562,34 @@ function handleSettingsUpdate() {
   const newTimeLimit = document.getElementById("newTimeLimit").value.trim();
 
   if (!newMaxClicks || isNaN(newMaxClicks) || parseInt(newMaxClicks) <= 0) {
-    alert("Inserisci un numero valido per i click massimi");
+    showDemoNotification("Inserisci un numero valido per i click massimi");
     return;
   }
 
   if (!newTimeLimit || isNaN(newTimeLimit) || parseInt(newTimeLimit) <= 0) {
-    alert("Inserisci un numero valido per il tempo limite");
+    showDemoNotification("Inserisci un numero valido per il tempo limite");
     return;
   }
 
+  const oldMaxClicks = MAX_CLICKS;
   MAX_CLICKS = parseInt(newMaxClicks);
   TIME_LIMIT_MINUTES = parseInt(newTimeLimit);
 
-  localStorage.setItem("max_clicks", MAX_CLICKS);
-  localStorage.setItem("time_limit_minutes", TIME_LIMIT_MINUTES);
-
+  // Aggiorna i click rimanenti in proporzione
   DEVICES.forEach((device) => {
-    const currentClicks = getClicksLeft(device.storage_key);
-    if (currentClicks > MAX_CLICKS) {
-      setClicksLeft(device.storage_key, MAX_CLICKS);
-    }
+    const currentClicks = getClicksLeft(device.button_id);
+    const newClicks = Math.max(
+      0,
+      Math.floor(currentClicks * (MAX_CLICKS / oldMaxClicks))
+    );
+    setClicksLeft(device.button_id, newClicks);
     updateButtonState(device);
   });
 
   document.getElementById("currentMaxClicks").textContent = MAX_CLICKS;
   document.getElementById("currentTimeLimit").textContent = TIME_LIMIT_MINUTES;
 
-  alert("Impostazioni aggiornate con successo!");
+  showDemoNotification("Impostazioni aggiornate con successo!");
 }
 
 // FUNZIONE AGGIUNTA: Gestione orario di check-in (range)
@@ -640,7 +598,7 @@ function handleCheckinTimeUpdate() {
   const newCheckinEndTime = document.getElementById("checkinEndTime").value;
 
   if (!newCheckinStartTime || !newCheckinEndTime) {
-    alert("Inserisci orari validi");
+    showDemoNotification("Inserisci orari validi");
     return;
   }
 
@@ -662,36 +620,11 @@ function handleCheckinTimeUpdate() {
   CHECKIN_START_TIME = newCheckinStartTime;
   CHECKIN_END_TIME = newCheckinEndTime;
 
-  localStorage.setItem("checkin_start_time", newCheckinStartTime);
-  localStorage.setItem("checkin_end_time", newCheckinEndTime);
-
   // Aggiorna la visualizzazione
   updateCheckinTimeDisplay();
   DEVICES.forEach(updateButtonState);
 
-  alert("Orario di check-in aggiornato con successo!");
-}
-
-async function updateGlobalCodeVersion() {
-  const savedVersion = parseInt(localStorage.getItem(CODE_VERSION_KEY)) || 1;
-  if (savedVersion < currentCodeVersion) {
-    localStorage.setItem(CODE_VERSION_KEY, currentCodeVersion.toString());
-
-    clearStorage("usage_start_time");
-    clearStorage("usage_hash");
-    DEVICES.forEach((device) => {
-      clearStorage(device.storage_key);
-    });
-
-    document.getElementById("controlPanel").style.display = "none";
-    document.getElementById("authCode").style.display = "block";
-    document.getElementById("auth-form").style.display = "block";
-    document.getElementById("btnCheckCode").style.display = "block";
-    document.getElementById("important").style.display = "block";
-
-    return true;
-  }
-  return false;
+  showDemoNotification("Orario di check-in aggiornato con successo!");
 }
 
 // =============================================
@@ -701,7 +634,11 @@ async function updateGlobalCodeVersion() {
 async function handleCodeSubmit() {
   const insertedCode = document.getElementById("authCode").value.trim();
   if (insertedCode !== CORRECT_CODE) {
-    alert("Codice errato! Riprova. Usa 2245 per la demo.");
+    // Aggiungi effetto shake per codice errato
+    const input = document.getElementById("authCode");
+    input.classList.add("shake");
+    setTimeout(() => input.classList.remove("shake"), 500);
+    showDemoNotification("Codice errato! Riprova. Usa 1234 per la demo.");
     return;
   }
 
@@ -719,6 +656,8 @@ async function handleCodeSubmit() {
   updateCheckinTimeDisplay();
 
   DEVICES.forEach(updateButtonState);
+
+  showDemoNotification("Accesso autorizzato! Benvenuto.");
 }
 
 // =============================================
@@ -726,27 +665,18 @@ async function handleCodeSubmit() {
 // =============================================
 
 async function init() {
-  // Verifica se la versione del codice è cambiata
-  const savedCodeVersion =
-    parseInt(localStorage.getItem(CODE_VERSION_KEY)) || 1;
-  if (savedCodeVersion < currentCodeVersion) {
-    clearStorage("usage_start_time");
-    clearStorage("usage_hash");
-    DEVICES.forEach((device) => {
-      clearStorage(device.storage_key);
-    });
-    localStorage.setItem(CODE_VERSION_KEY, currentCodeVersion.toString());
-
-    document.getElementById("controlPanel").style.display = "none";
-    document.getElementById("authCode").style.display = "block";
-    document.getElementById("auth-form").style.display = "block";
-    document.getElementById("btnCheckCode").style.display = "block";
-    document.getElementById("important").style.display = "block";
-  }
-
   // Configura gli event listener
   const btnCheck = document.getElementById("btnCheckCode");
   if (btnCheck) btnCheck.addEventListener("click", handleCodeSubmit);
+
+  // Permetti l'invio con il tasto Enter
+  document
+    .getElementById("authCode")
+    .addEventListener("keypress", function (e) {
+      if (e.key === "Enter") {
+        handleCodeSubmit();
+      }
+    });
 
   DEVICES.forEach((device) => {
     const btn = document.getElementById(device.button_id);
@@ -781,6 +711,15 @@ async function init() {
   const btnAdminLogin = document.getElementById("btnAdminLogin");
   if (btnAdminLogin) btnAdminLogin.addEventListener("click", handleAdminLogin);
 
+  // Permetti l'invio della password admin con Enter
+  document
+    .getElementById("adminPass")
+    .addEventListener("keypress", function (e) {
+      if (e.key === "Enter") {
+        handleAdminLogin();
+      }
+    });
+
   const btnCodeUpdate = document.getElementById("btnCodeUpdate");
   if (btnCodeUpdate) btnCodeUpdate.addEventListener("click", handleCodeUpdate);
 
@@ -799,10 +738,6 @@ async function init() {
   if (btnToggleCheckinTime) {
     btnToggleCheckinTime.addEventListener("click", () => {
       CHECKIN_TIME_ENABLED = !CHECKIN_TIME_ENABLED;
-      localStorage.setItem(
-        "checkin_time_enabled",
-        CHECKIN_TIME_ENABLED.toString()
-      );
 
       if (CHECKIN_TIME_ENABLED) {
         btnToggleCheckinTime.textContent = "✅ Check-in Time ON";
@@ -816,6 +751,12 @@ async function init() {
 
       updateCheckinTimeDisplay();
       DEVICES.forEach(updateButtonState);
+
+      showDemoNotification(
+        CHECKIN_TIME_ENABLED
+          ? "Controllo orario attivato"
+          : "Controllo orario disattivato"
+      );
     });
 
     // Imposta stato iniziale del pulsante
@@ -828,10 +769,10 @@ async function init() {
     }
   }
 
-  const expired = await checkTimeLimit();
-  if (!expired) {
-    const startTime = getStorage("usage_start_time");
-    if (startTime) {
+  // Verifica se c'è una sessione attiva
+  if (appState.usageStartTime) {
+    const expired = await checkTimeLimit();
+    if (!expired) {
       document.getElementById("controlPanel").style.display = "block";
       document.getElementById("authCode").style.display = "none";
       document.getElementById("auth-form").style.display = "none";
@@ -847,16 +788,14 @@ async function init() {
   }
 
   timeCheckInterval = setInterval(async () => {
-    const expired = await checkTimeLimit();
-    if (!expired) {
-      await updateGlobalCodeVersion();
-      updateCheckinTimeDisplay();
-    }
+    await checkTimeLimit();
+    updateCheckinTimeDisplay();
   }, 1000);
 
   // Aggiorna l'orario ogni minuto
   setInterval(updateCheckinTimeDisplay, 60000);
 
+  // Disabilita il tasto destro per una migliore esperienza demo
   document.addEventListener("contextmenu", (e) => e.preventDefault());
 
   const toggleBtn = document.getElementById("toggleAdmin");
@@ -868,6 +807,9 @@ async function init() {
         adminArea.style.display === ""
       ) {
         adminArea.style.display = "block";
+        document.getElementById("adminLogin").style.display = "block";
+        document.getElementById("adminPanel").style.display = "none";
+        document.getElementById("adminPass").value = "";
       } else {
         adminArea.style.display = "none";
       }
