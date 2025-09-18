@@ -114,17 +114,18 @@ function demoReset() {
   CHECKIN_START_TIME = "14:00";
   CHECKIN_END_TIME = "22:00";
   CHECKIN_TIME_ENABLED = true;
-  location.reload(),
-    (appState = {
-      usageStartTime: null,
-      clicks: {
-        MainDoor: MAX_CLICKS,
-        AptDoor: MAX_CLICKS,
-        ExtraDoor1: MAX_CLICKS,
-        ExtraDoor2: MAX_CLICKS,
-      },
-      codeVersion: 1,
-    });
+
+
+  appState = {
+    usageStartTime: null,
+    clicks: {
+      MainDoor: MAX_CLICKS,
+      AptDoor: MAX_CLICKS,
+      ExtraDoor1: MAX_CLICKS,
+      ExtraDoor2: MAX_CLICKS,
+    },
+    codeVersion: 1,
+  };
 
   // Resetta l'interfaccia
   document.getElementById("controlPanel").style.display = "none";
@@ -170,7 +171,7 @@ function showDemoNotification(message) {
   // Rimuovi la notifica dopo 3 secondi
   setTimeout(() => {
     notification.classList.add("hidden");
-  }, 1000);
+  }, 3000);
 }
 
 // =============================================
