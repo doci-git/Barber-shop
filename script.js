@@ -741,11 +741,11 @@ async function init() {
       CHECKIN_TIME_ENABLED = !CHECKIN_TIME_ENABLED;
 
       if (CHECKIN_TIME_ENABLED) {
-        btnToggleCheckinTime.textContent = "✅ Check-in Time ON";
+        btnToggleCheckinTime.textContent = "✅ Check-in Range Time ON";
         btnToggleCheckinTime.classList.remove("btn-error");
         btnToggleCheckinTime.classList.add("btn-success");
       } else {
-        btnToggleCheckinTime.textContent = "❌ Check-in Time OFF";
+        btnToggleCheckinTime.textContent = "❌ Check-in Range Time OFF";
         btnToggleCheckinTime.classList.remove("btn-success");
         btnToggleCheckinTime.classList.add("btn-error");
       }
@@ -762,10 +762,10 @@ async function init() {
 
     // Imposta stato iniziale del pulsante
     if (CHECKIN_TIME_ENABLED) {
-      btnToggleCheckinTime.textContent = "✅ Check-in Time ON";
+      btnToggleCheckinTime.textContent = "✅ Check-in Range Time ON";
       btnToggleCheckinTime.classList.add("btn-success");
     } else {
-      btnToggleCheckinTime.textContent = "❌ Check-in Time OFF";
+      btnToggleCheckinTime.textContent = "❌ Check-in Time Range OFF";
       btnToggleCheckinTime.classList.add("btn-error");
     }
   }
