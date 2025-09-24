@@ -715,11 +715,11 @@ async function init() {
   // Permetti l'invio della password admin con Enter
   document
     .getElementById("adminPass")
-    .addEventListener("keypress", function (e) {
-      if (e.key === "Enter") {
-        handleAdminLogin();
-      }
-    });
+    // .addEventListener("keypress", function (e) {
+    //   if (e.key === "Enter") {
+    //     handleAdminLogin();
+    //   }
+    // });
 
   const btnCodeUpdate = document.getElementById("btnCodeUpdate");
   if (btnCodeUpdate) btnCodeUpdate.addEventListener("click", handleCodeUpdate);

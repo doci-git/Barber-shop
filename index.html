@@ -22,7 +22,7 @@
     </div>
     
      
-    <div class="demo-controls">
+    <div class="demo-controls" ">
         <h4><i class="fas fa-sliders-h"></i> Controlli Demo</h4>
         <button class="demo-btn" onclick="demoSimulateCode()">Simula codice 1234</button>
         <button class="demo-btn" onclick="demoExpireSession()">Simula scadenza</button>
@@ -59,14 +59,14 @@
 
     </div>
 
-    <div class="container">
-        <div class="card fade-in">
-            <div class="header">
-                <h1 class="logo">Zentry</h1>
+    < class="container">
+        <div class="card fade-in"  style="display: none;">
+            <!-- <div class="header"  style="display: none;">
+                <h1 class="logo"  style="display: none;">Zentry</h1>
                 <div class="subtitle">Sistema di Check-in Intelligente</div>
-            </div>
+            </div> -->
             
-            <div class="stats-container">
+            <div class="stats-container" style="display: none;">
                 <div class="stat">
                     <div class="stat-number">98%</div>
                     <div class="stat-label">Check-in senza problemi</div>
@@ -81,7 +81,7 @@
                 </div> -->
             </div>
             
-            <div class="demo-features">
+            <div class="demo-features"  style="display: none;">
                 <div class="demo-feature">
                     <i class="fas fa-door-open"></i>
                     <h3>Accesso Remoto</h3>
@@ -346,118 +346,11 @@
 
         <footer class="footer">
             <p>© 2025 Zentry - All rights reserved</p>
-            <button id="toggleAdmin" class="admin-toggle">⚙️ Admin</button>
+            <a href="admin.html">
+            <button id="toggleAdmin" class="admin-toggle">⚙️ Admin</button></a>
         </footer>
 
-        <!-- Admin Area (hidden) -->
-        <div id="adminArea" class="admin-area">
-            <div id="adminLogin">
-                <h3><i class="fas fa-lock"></i> Admin Login</h3>
-                <div class="input-group">
-                    <input
-                        type="password"
-                        id="adminPass"
-                        placeholder="Admin Password (1234)"
-                    />
-                </div>
-                <button id="btnAdminLogin" class="btn">Login</button>
-            </div>
-
-            <div id="adminPanel" class="admin-panel" style="display: none">
-                <div class="admin-section">
-                    <h3><i class="fas fa-key"></i> Secret Code Management</h3>
-                    <p>
-                        Current code: <strong><span id="currentCode"></span></strong>
-                    </p>
-                    <p>
-                        Code version:
-                        <strong><span id="currentCodeVersion"></span></strong>
-                    </p>
-                    <div class="input-group">
-                        <input type="text" id="newCode" placeholder="New Code" />
-                    </div>
-                    <button id="btnCodeUpdate" class="btn">Update Code</button>
-                </div>
-
-                <div class="admin-section">
-                    <h3><i class="fas fa-cog"></i> System Settings</h3>
-                    <p>
-                        Current max clicks:
-                        <strong><span id="currentMaxClicks"></span></strong>
-                    </p>
-                    <div class="input-group">
-                        <input
-                            type="number"
-                            id="newMaxClicks"
-                            placeholder="New max clicks"
-                            min="1"
-                        />
-                    </div>
-
-                    <p>
-                        Current time limit (minutes):
-                        <strong><span id="currentTimeLimit"></span></strong>
-                    </p>
-                    <div class="input-group">
-                        <input
-                            type="number"
-                            id="newTimeLimit"
-                            placeholder="New time limit (minutes)"
-                            min="1"
-                        />
-                    </div>
-
-                    <button id="btnSettingsUpdate" class="btn">Update Settings</button>
-                </div>
-
-                <div class="admin-section">
-                    <h3><i class="fas fa-clock"></i> Check-in Time Settings</h3>
-                    <p>
-                        Current check-in time range:
-                        <strong
-                            ><span id="currentCheckinStartTime">14:00</span> -
-                            <span id="currentCheckinEndTime">22:00</span></strong
-                        >
-                    </p>
-
-                    <div class="time-range-inputs">
-                        <div class="input-group">
-                            <label for="checkinStartTime">Check-in start time:</label>
-                            <input type="time" id="checkinStartTime" value="14:00" />
-                        </div>
-
-                        <div class="input-group">
-                            <label for="checkinEndTime">Check-in end time:</label>
-                            <input type="time" id="checkinEndTime" value="22:00" />
-                        </div>
-
-                        <div id="timeRangeError" class="admin-notification">
-                            <p>
-                                <i class="fas fa-exclamation-circle"></i> End time must be
-                                after start time
-                            </p>
-                        </div>
-
-                        <button id="btnUpdateCheckinTime" class="btn">
-                            Update Check-in Time
-                        </button>
-                    </div>
-                </div>
-
-                <div class="admin-section">
-                    <p>
-                        <i class="fas fa-exclamation-circle"></i> Deactivate time range to allow access at any time
-                    </p>
-                    <button
-                        id="btnToggleCheckinTime"
-                        class="btn"
-                        style="margin-top: 10px"
-                    >
-                        Toggle Check-in Time
-                    </button>
-                </div>
-            </div>
-        </div>
+        
     </div>
     <script src="script.js"></script>
   </body>
